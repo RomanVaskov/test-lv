@@ -28,21 +28,26 @@ if (isset ($_POST['send_user'])) { // запрет прямого обращен
         unset ($phone);
     }
 
-    $order = new LvClient($config['project'], $config['key'], LvClient::ADD_ORDER);
-    $order->setUrlGetParams([]);
-    $order->createOrder([
-        'fio' => $name,
-        'phone' => $phone,
-        'domains' => $domain,
-        'ip' => $ip,
-        'goods' => [
-            Order::addGood(152576, 99, 1),
-            Order::addGood(93440, 999, 1),
-        ]
-    ]);
+    $order = new LvClient($config['project'], $config['key']);
+    $order->setUrlParams(LvClient::ADD_ORDER, []);
+    $order->createOrder(
+        new Order(
+            $name,
+            $phone,
+            $domain,
+            $ip,
+            [
+                Order::addGood(new Good(152576, 99, 1)),
+                Order::addGood(new Good(93440, 999, 1)),
+            ]
+        ));
     $order->sendData();
     $idOrder = $order->getOrderId();
-
     $_SESSION['order_id'] = $idOrder;
+
+    //Получение информации о заказе
+    $orderData = $order->getOrderById($idOrder);
+    $results = json_decode($orderData, true);
+    $_SESSION['order_data'] = $results;
     header("Location: /success.php");
 }

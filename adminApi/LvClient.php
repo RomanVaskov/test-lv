@@ -6,44 +6,43 @@ class LvClient {
     const ADD_ORDER = 'addOrder';
     const UPDATE_ORDER = 'updateOrder';
     const GET_PROJECT_INFO = 'getProjectInfo';
+    const GET_ORDERS_BY_IDS = 'getOrdersByIds';
 
     private $project; //Название проекта
     private $apiKey; //АПИ ключ от проекта
-    private $method; //Метод обработки информации
-    private $orderId; //ИД заказа
 
     private $orderData; //Массив данных для отправки POST запроса
     private $url; //URL запроса к АПИ
+    private $orderId; //ИД заказа
+    private $apiResponse; //Ответ от АПИ
 
-    public function __construct($project, $apiKey, $method) {
+    public function __construct($project, $apiKey) {
         $this->project = $project;
         $this->apiKey = $apiKey;
-        $this->method = $method;
     }
 
-    public function createOrder($arrayData) {
-        $response = (new Order($arrayData))->getOrderData();
-        return $this->orderData = $response;
+    public function createOrder(Order $arrayData) {
+        $this->orderData = $arrayData;
+        return $arrayData;
     }
 
-    public function setUrlGetParams($getParams) {
+    public function updateOrder(Order $arrayData) {
+        $this->orderData = $arrayData;
+        return $arrayData;
+    }
+
+    public function getOrderById($orderId) {
+        $this->setUrlParams(self::GET_ORDERS_BY_IDS, ['ids' => $orderId]);
+        return $this->getData();
+    }
+
+    public function setUrlParams($method, $getParams) {
         $str = '';
         foreach ($getParams as $key => $value) {
             $str .= '&' . $key . '=' . $value;
         }
-        $url = "https://{$this->project}.leadvertex.ru/api/admin/{$this->method}.html?token={$this->apiKey}{$str}";
+        $url = "https://{$this->project}.leadvertex.ru/api/admin/{$method}.html?token={$this->apiKey}{$str}";
         return $this->url = $url;
-    }
-
-    private function orderId($result) {
-        $response = json_decode($result, true);
-        $array = array_keys($response);
-        $id = array_shift($array);
-        return $id;
-    }
-
-    public function getOrderId() {
-        return $this->orderId;
     }
 
     public function sendData() {
@@ -58,9 +57,8 @@ class LvClient {
             CURLOPT_POSTFIELDS => http_build_query($this->orderData)
         ]);
         $response = curl_exec($curl);
-        $this->orderId = $this->orderId($response);
         curl_close($curl);
-        return $response;
+        return $this->apiResponse = $response;
     }
 
     public function getData() {
@@ -70,5 +68,12 @@ class LvClient {
         $data = curl_exec($curl);
         curl_close($curl);
         return $data;
+    }
+
+    public function getOrderId() {
+        $response = json_decode($this->apiResponse, true);
+        $array = array_keys($response);
+        $id = array_shift($array);
+        return $this->orderId = $id;
     }
 }
