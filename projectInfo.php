@@ -4,8 +4,7 @@ $config = require_once "adminApi/config.php"; //Данные о проекте, 
 require_once "adminApi/LvClient.php"; //AdminApi
 
 $dataProject = new LvClient($config['project'], $config['key']);
-$dataProject->setUrlParams(LvClient::GET_PROJECT_INFO, []);
-$projectInfo = $dataProject->getData();
+$projectInfo = $dataProject->getProjectInfo(LvClient::GET_PROJECT_INFO, []);
 
 $results = json_decode($projectInfo, true);
 $_SESSION['results'] = $results;

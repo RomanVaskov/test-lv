@@ -4,6 +4,7 @@ if (isset ($_POST['send_user'])) { // запрет прямого обращен
     $config = require_once "adminApi/config.php"; //Данные о проекте, ID проекта, API ключ
     require_once "adminApi/LvClient.php"; //AdminApi
     require_once "adminApi/Order.php";
+    require_once "adminApi/Fields.php";
 
     $name = $_POST['user_name'];
     $phone = $_POST['user_phone'];
@@ -29,20 +30,20 @@ if (isset ($_POST['send_user'])) { // запрет прямого обращен
     }
 
     $order = new LvClient($config['project'], $config['key']);
-    $order->setUrlParams(LvClient::ADD_ORDER, []);
-    $order->createOrder(
-        new Order(
-            $name,
-            $phone,
-            $domain,
-            $ip,
-            [
+    $order->createOrder(LvClient::ADD_ORDER, [],
+        new Order([
+            Fields::FIO => $name,
+            Fields::PHONE => $phone,
+            Fields::DOMAIN => $domain,
+            Fields::IP => $ip,
+            Fields::GOODS => [
                 Order::addGood(new Good(152576, 99, 1)),
                 Order::addGood(new Good(93440, 999, 1)),
-            ]
-        ));
-    $order->sendData();
-    $idOrder = $order->getOrderId();
+            ],
+            Fields::ADDITIONAL_1 => "Test Order",
+            Fields::EMAIL => "test@email.com"
+        ]));
+    $idOrder = $order->getIdOrder();
     $_SESSION['order_id'] = $idOrder;
 
     //Получение информации о заказе
