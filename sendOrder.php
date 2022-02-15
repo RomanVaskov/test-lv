@@ -4,7 +4,7 @@ if (isset ($_POST['send_user'])) { // запрет прямого обращен
     $config = require_once "adminApi/config.php"; //Данные о проекте, ID проекта, API ключ
     require_once "adminApi/LvClient.php"; //AdminApi
     require_once "adminApi/Order.php";
-    require_once "adminApi/Fields.php";
+    require_once "adminApi/Good.php";
 
     $name = $_POST['user_name'];
     $phone = $_POST['user_phone'];
@@ -29,26 +29,27 @@ if (isset ($_POST['send_user'])) { // запрет прямого обращен
         unset ($phone);
     }
 
-    $order = new LvClient($config['project'], $config['key']);
-    $order->createOrder(LvClient::ADD_ORDER, [],
-        new Order([
-            Fields::FIO => $name,
-            Fields::PHONE => $phone,
-            Fields::DOMAIN => $domain,
-            Fields::IP => $ip,
-            Fields::GOODS => [
-                Order::addGood(new Good(152576, 99, 1)),
-                Order::addGood(new Good(93440, 999, 1)),
-            ],
-            Fields::ADDITIONAL_1 => "Test Order",
-            Fields::EMAIL => "test@email.com"
-        ]));
-    $idOrder = $order->getIdOrder();
-    $_SESSION['order_id'] = $idOrder;
+    $order = new Order();
+    $order->fio = $name;
+    $order->phone = $phone;
+    $order->domain = $domain;
+    $order->ip = $ip;
+    $order->goods = [
+        $order->addGood(new Good(152576, 99, 1)),
+        $order->addGood(new Good(93440, 999, 1))
+    ];
+
+    $client = new LvClient($config['project'], $config['key']);
+    $orderId = $client->createOrder($order);
+
+    //echo $orderId; // должно вернуть id заказа
+
+    $_SESSION['order_id'] = $orderId;
 
     //Получение информации о заказе
-    $orderData = $order->getOrderById($idOrder);
+    $orderData = $client->getOrderById($orderId);
     $results = json_decode($orderData, true);
     $_SESSION['order_data'] = $results;
+
     header("Location: /success.php");
 }

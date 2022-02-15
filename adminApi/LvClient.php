@@ -18,16 +18,15 @@ class LvClient {
         $this->apiKey = $apiKey;
     }
 
-    public function createOrder($method, $getParams, Order $arrayData) {
-        $url = $this->setUrlParams($method, $getParams);
-        $response = $this->sendData($url, $arrayData->postParams);
-        $this->orderId($response);
-        return $response;
+    public function createOrder($order) {
+        $url = $this->setUrlParams(self::ADD_ORDER, []);
+        $response = $this->sendData($url, $order);
+        return $this->orderId($response);
     }
 
-    public function updateOrder($method, $getParams, Order $arrayData) {
-        $url = $this->setUrlParams($method, $getParams);
-        $response = $this->sendData($url, $arrayData->postParams);
+    public function updateOrder($orderId, $order) {
+        $url = $this->setUrlParams(self::UPDATE_ORDER, ['id' => $orderId]);
+        $response = $this->sendData($url, $order);
         return $response;
     }
 
@@ -40,7 +39,7 @@ class LvClient {
         return $this->orderId;
     }
 
-    public function getProjectInfo($method, $getParams) {
+    public function getInfo($method, $getParams) {
         $url = $this->setUrlParams($method, $getParams);
         return $this->getData($url);
     }
