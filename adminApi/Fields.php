@@ -59,7 +59,7 @@ class Fields {
     }
 
     public function setEmail($email) {
-        if (!preg_match('/^[\w-\._\+%]+@(?:[\w-]+\.)+[\w]{2,6}$/', $email)) {
+        if (!preg_match('/(^[a-zA-Z0-9_.]+[@]{1}[a-z0-9]+[\.][a-z]+$)/', $email)) {
             throw new Exception("Формат Email не верный!");
         } else {
             $this->email = $email;
