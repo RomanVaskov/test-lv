@@ -17,15 +17,15 @@ $goodID = $_POST['goodID'];
 $price = $_POST['price'];
 
 $fields = new Fields();
-$fields->fio = $name;
-$fields->setPhone($phone);
-$fields->domain = $domain;
-$fields->ip = $ip;
-$fields->goods = [
-    'add' => [
-        new Good($goodID, $price, 1)
-    ]
-];
+$fields->setFio($name)
+    ->setPhone($phone)
+    ->setDomain($domain)
+    ->setIp($ip)
+    ->setGoods([
+        'add' => [
+            new Good($goodID, $price, 1)
+        ]
+    ]);
 
 $order = new Order($fields->toArray());
 

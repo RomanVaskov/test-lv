@@ -31,16 +31,18 @@ if (isset ($_POST['send_user'])) { // запрет прямого обращен
     }
 
     $fields = new Fields();
-    $fields->fio = $name;
-    $fields->setPhone($phone);
-    $fields->domain = $domain;
-    $fields->ip = $ip;
-    $fields->setEmail('example@email.com');
-    $fields->additional1 = 'Test Order';
-    $fields->goods = [
-        new Good(152576, 99, 1),
-        new Good(93440, 999, 1)
-    ];
+    $fields->setFio($name)
+        ->setPhone($phone)
+        ->setDomain($domain)
+        ->setIp($ip)
+        ->setEmail('example@email.com')
+        ->setAdditional1('Test Order')
+        ->setGoods(
+            [
+                new Good(152576, 99, 1),
+                new Good(93440, 999, 1)
+            ]
+        );
 
     $order = new Order($fields->toArray());
 
