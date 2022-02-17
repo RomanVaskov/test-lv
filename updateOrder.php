@@ -1,9 +1,9 @@
 <?php
 session_start();
 $orderId = $_SESSION['order_id'];
+$name = $_SESSION['order_name'];
+$phone = $_SESSION['order_tel'];
 
-$name = $_POST['user_name'];
-$phone = $_POST['user_phone'];
 $domain = $_SERVER['HTTP_HOST'];
 $ip = $_SERVER['REMOTE_ADDR'];
 
@@ -11,20 +11,23 @@ $config = require_once "adminApi/config.php"; //Данные о проекте, 
 require_once "adminApi/LvClient.php"; //AdminApi
 require_once "adminApi/Order.php";
 require_once "adminApi/Good.php";
+require_once "adminApi/Fields.php";
 
 $goodID = $_POST['goodID'];
 $price = $_POST['price'];
 
-$order = new Order();
-$order->fio = $name;
-$order->phone = $phone;
-$order->domain = $domain;
-$order->ip = $ip;
-$order->goods = [
+$fields = new Fields();
+$fields->fio = $name;
+$fields->setPhone($phone);
+$fields->domain = $domain;
+$fields->ip = $ip;
+$fields->goods = [
     'add' => [
-        $order->addGood(new Good($goodID, $price, 1))
+        new Good($goodID, $price, 1)
     ]
 ];
+
+$order = new Order($fields->toArray());
 
 $clientUpdateOrder = new LvClient($config['project'], $config['key']);
 $clientUpdateOrder->updateOrder($orderId, $order);

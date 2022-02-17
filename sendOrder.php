@@ -1,6 +1,6 @@
 <?php
 if (isset ($_POST['send_user'])) { // запрет прямого обращения к обработчику
-    //session_start();
+    session_start();
     $config = require_once "adminApi/config.php"; //Данные о проекте, ID проекта, API ключ
     require_once "adminApi/LvClient.php"; //AdminApi
     require_once "adminApi/Order.php";
@@ -40,20 +40,19 @@ if (isset ($_POST['send_user'])) { // запрет прямого обращен
         new Good(93440, 999, 1)
     ];
 
-    $order = new Order($fields);
+    $order = new Order($fields->toArray());
 
     $client = new LvClient($config['project'], $config['key']);
-    //$orderId = $client->createOrder($order);
-    $client->createOrder($order);
+    $orderId = $client->createOrder($order);
 
     //echo $orderId; // должно вернуть id заказа
 
-    //$_SESSION['order_id'] = $orderId;
+    $_SESSION['order_id'] = $orderId;
 
     //Получение информации о заказе
-    //$orderData = $client->getOrderById($orderId);
-    //$results = json_decode($orderData, true);
-    //$_SESSION['order_data'] = $results;
+    $orderData = $client->getOrderById($orderId);
+    $results = json_decode($orderData, true);
+    $_SESSION['order_data'] = $results;
 
-    //header("Location: /success.php");
+    header("Location: /success.php");
 }
