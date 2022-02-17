@@ -19,9 +19,11 @@ class LvClient {
     }
 
     public function createOrder($order) {
-        $url = $this->setUrlParams(self::ADD_ORDER, []);
-        $response = $this->sendData($url, $order);
-        return $this->orderId($response);
+        $data = $order->order;
+        var_dump($data->getPhone());
+//        $url = $this->setUrlParams(self::ADD_ORDER, []);
+//        $response = $this->sendData($url, $order->order);
+//        return $this->orderId($response);
     }
 
     public function updateOrder($orderId, $order) {

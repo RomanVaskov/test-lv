@@ -1,7 +1,7 @@
 <?php
 require_once "adminApi/Good.php";
-session_start();
-$results = $_SESSION['results'];
+//session_start();
+//$results = $_SESSION['results'];
 ?>
 
 <!doctype html>
