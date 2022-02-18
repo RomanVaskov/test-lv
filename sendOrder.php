@@ -45,7 +45,6 @@ if (isset ($_POST['send_user'])) { // запрет прямого обращен
         );
 
     $order = new Order($fields->toArray());
-
     $client = new LvClient($config['project'], $config['key']);
     $orderId = $client->createOrder($order);
 

@@ -2,51 +2,51 @@
 
 class Fields
 {
-    private $fio;
-    private $phone;
-    private $email;
-    private $comment;
-    private $quantity;
-    private $country;
-    private $postIndex;
-    private $region;
-    private $city;
-    private $address;
-    private $house;
-    private $flat;
-    private $goods;
-    private $additional1;
-    private $additional2;
-    private $additional3;
-    private $additional4;
-    private $additional5;
-    private $additional6;
-    private $additional7;
-    private $additional8;
-    private $additional9;
-    private $additional10;
-    private $additional11;
-    private $additional12;
-    private $additional13;
-    private $additional14;
-    private $additional15;
-    private $additional16;
-    private $additional17;
-    private $additional18;
-    private $additional19;
-    private $additional20;
-    private $additional21;
-    private $additional22;
-    private $additional23;
-    private $additional24;
-    private $additional25;
-    private $domain;
-    private $referer;
-    private $ip;
-    private $datetime;
-    private $timezone;
-    private $operatorID;
-    private $webmaster;
+    private string $fio = '';
+    private string $phone = '';
+    private string $email = '';
+    private string $comment = '';
+    private string $quantity = '';
+    private string $country = '';
+    private string $postIndex = '';
+    private string $region = '';
+    private string $city = '';
+    private string $address = '';
+    private string $house = '';
+    private string $flat = '';
+    private array $goods = [];
+    private string $additional1 = '';
+    private string $additional2 = '';
+    private string $additional3 = '';
+    private string $additional4 = '';
+    private string $additional5 = '';
+    private string $additional6 = '';
+    private string $additional7 = '';
+    private string $additional8 = '';
+    private string $additional9 = '';
+    private string $additional10 = '';
+    private string $additional11 = '';
+    private string $additional12 = '';
+    private string $additional13 = '';
+    private string $additional14 = '';
+    private string $additional15 = '';
+    private string $additional16 = '';
+    private string $additional17 = '';
+    private string $additional18 = '';
+    private string $additional19 = '';
+    private string $additional20 = '';
+    private string $additional21 = '';
+    private string $additional22 = '';
+    private string $additional23 = '';
+    private string $additional24 = '';
+    private string $additional25 = '';
+    private string $domain = '';
+    private string $referer = '';
+    private string $ip = '';
+    private string $datetime = '';
+    private string $timezone = '';
+    private string $operatorID = '';
+    private string $webmaster = '';
 
     /*
      * Getter
@@ -112,7 +112,7 @@ class Fields
         return $this->flat;
     }
 
-    public function getGoods()
+    public function getGoods(): array
     {
         return $this->goods;
     }
@@ -624,7 +624,7 @@ class Fields
         ];
 
         foreach ($fieldsArray as $key => $item) {
-            if (!isset($item)) {
+            if (empty($item)) {
                 unset($fieldsArray[$key]);
             }
         }
