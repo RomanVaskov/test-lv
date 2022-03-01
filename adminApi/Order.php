@@ -3,14 +3,16 @@
 require_once 'Good.php';
 
 class Order {
-    public $order;
+    private $order;
 
-    function __construct($order) {
+    public function setOrder($order)
+    {
         $this->order = $order;
+        return $this;
     }
 
-    //Метод по добавлению товара к заказу
-    public function addGood(Good $good) {
-        return $good;
+    public function getOrder()
+    {
+        return $this->order;
     }
 }

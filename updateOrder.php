@@ -16,21 +16,23 @@ require_once "adminApi/Fields.php";
 $goodID = $_POST['goodID'];
 $price = $_POST['price'];
 
+$addGood = new Good();
+$addGood->setGoodID($goodID)->setPrice($price)->setQuantity(1);
+
 $fields = new Fields();
 $fields->setFio($name)
     ->setPhone($phone)
     ->setDomain($domain)
     ->setIp($ip)
     ->setGoods([
-        'add' => [
-            new Good($goodID, $price, 1)
-        ]
+        'add' => [$addGood->toArray()]
     ]);
 
-$order = new Order($fields->toArray());
+$order = new Order();
+$order->setOrder($fields->toArray());
 
 $clientUpdateOrder = new LvClient($config['project'], $config['key']);
-$clientUpdateOrder->updateOrder($orderId, $order);
+$clientUpdateOrder->updateOrder($orderId, $order->getOrder());
 
 //Получение информации о заказе
 $orderData = $clientUpdateOrder->getOrderById($orderId);

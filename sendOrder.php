@@ -30,6 +30,12 @@ if (isset ($_POST['send_user'])) { // запрет прямого обращен
         unset ($phone);
     }
 
+    $good1 = new Good();
+    $good1->setGoodID(152576)->setPrice(99)->setQuantity(1);
+
+    $good2 = new Good();
+    $good2->setGoodID(93440)->setPrice(999)->setQuantity(1);
+
     $fields = new Fields();
     $fields->setFio($name)
         ->setPhone($phone)
@@ -37,16 +43,13 @@ if (isset ($_POST['send_user'])) { // запрет прямого обращен
         ->setIp($ip)
         ->setEmail('example@email.com')
         ->setAdditional1('Test Order')
-        ->setGoods(
-            [
-                new Good(152576, 99, 1),
-                new Good(93440, 999, 1)
-            ]
-        );
+        ->setGoods([$good1->toArray(), $good2->toArray()]);
 
-    $order = new Order($fields->toArray());
+    $order = new Order();
+    $order->setOrder($fields->toArray());
+
     $client = new LvClient($config['project'], $config['key']);
-    $orderId = $client->createOrder($order);
+    $orderId = $client->createOrder($order->getOrder());
 
     //echo $orderId; // должно вернуть id заказа
 

@@ -20,13 +20,13 @@ class LvClient {
 
     public function createOrder($order) {
         $url = $this->setUrlParams(self::ADD_ORDER, []);
-        $response = $this->sendData($url, $order->order);
+        $response = $this->sendData($url, $order);
         return $this->orderId($response);
     }
 
     public function updateOrder($orderId, $order) {
         $url = $this->setUrlParams(self::UPDATE_ORDER, ['id' => $orderId]);
-        $response = $this->sendData($url, $order->order);
+        $response = $this->sendData($url, $order);
         return $response;
     }
 

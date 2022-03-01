@@ -48,238 +48,10 @@ class Fields
     private string $operatorID = '';
     private string $webmaster = '';
 
-    /*
-     * Getter
-     */
-
     public function getFio()
     {
         return $this->fio;
     }
-
-    public function getPhone()
-    {
-        return $this->phone;
-    }
-
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    public function getComment()
-    {
-        return $this->comment;
-    }
-
-    public function getQuantity()
-    {
-        return $this->quantity;
-    }
-
-    public function getCountry()
-    {
-        return $this->country;
-    }
-
-    public function getPostIndex()
-    {
-        return $this->postIndex;
-    }
-
-    public function getRegion()
-    {
-        return $this->region;
-    }
-
-    public function getCity()
-    {
-        return $this->city;
-    }
-
-    public function getAddress()
-    {
-        return $this->address;
-    }
-
-    public function getHouse()
-    {
-        return $this->house;
-    }
-
-    public function getFlat()
-    {
-        return $this->flat;
-    }
-
-    public function getGoods(): array
-    {
-        return $this->goods;
-    }
-
-    public function getAdditional1()
-    {
-        return $this->additional1;
-    }
-
-    public function getAdditional2()
-    {
-        return $this->additional2;
-    }
-
-    public function getAdditional3()
-    {
-        return $this->additional3;
-    }
-
-    public function getAdditional4()
-    {
-        return $this->additional4;
-    }
-
-    public function getAdditional5()
-    {
-        return $this->additional5;
-    }
-
-    public function getAdditional6()
-    {
-        return $this->additional6;
-    }
-
-    public function getAdditional7()
-    {
-        return $this->additional7;
-    }
-
-    public function getAdditional8()
-    {
-        return $this->additional8;
-    }
-
-    public function getAdditional9()
-    {
-        return $this->additional9;
-    }
-
-    public function getAdditional10()
-    {
-        return $this->additional10;
-    }
-
-    public function getAdditional11()
-    {
-        return $this->additional11;
-    }
-
-    public function getAdditional12()
-    {
-        return $this->additional12;
-    }
-
-    public function getAdditional13()
-    {
-        return $this->additional13;
-    }
-
-    public function getAdditional14()
-    {
-        return $this->additional14;
-    }
-
-    public function getAdditional15()
-    {
-        return $this->additional15;
-    }
-
-    public function getAdditional16()
-    {
-        return $this->additional16;
-    }
-
-    public function getAdditional17()
-    {
-        return $this->additional17;
-    }
-
-    public function getAdditional18()
-    {
-        return $this->additional18;
-    }
-
-    public function getAdditional19()
-    {
-        return $this->additional19;
-    }
-
-    public function getAdditional20()
-    {
-        return $this->additional20;
-    }
-
-    public function getAdditional21()
-    {
-        return $this->additional21;
-    }
-
-    public function getAdditional22()
-    {
-        return $this->additional22;
-    }
-
-    public function getAdditional23()
-    {
-        return $this->additional23;
-    }
-
-    public function getAdditional24()
-    {
-        return $this->additional24;
-    }
-
-    public function getAdditional25()
-    {
-        return $this->additional25;
-    }
-
-    public function getDomain()
-    {
-        return $this->domain;
-    }
-
-    public function getReferer()
-    {
-        return $this->referer;
-    }
-
-    public function getIp()
-    {
-        return $this->ip;
-    }
-
-    public function getDatetime()
-    {
-        return $this->datetime;
-    }
-
-    public function getTimezone()
-    {
-        return $this->timezone;
-    }
-
-    public function getOperatorID()
-    {
-        return $this->operatorID;
-    }
-
-    public function getWebmaster()
-    {
-        return $this->webmaster;
-    }
-
-    /*
-     * Setter
-     */
 
     public function setFio($fio)
     {
@@ -289,6 +61,11 @@ class Fields
             $this->fio = $fio;
         }
         return $this;
+    }
+
+    public function getPhone()
+    {
+        return $this->phone;
     }
 
     public function setPhone($phone)
@@ -301,6 +78,11 @@ class Fields
         return $this;
     }
 
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
     public function setEmail($email)
     {
         if (!preg_match('/(^[a-zA-Z0-9_.]+[@]{1}[a-z0-9]+[\.][a-z]+$)/', $email)) {
@@ -311,19 +93,45 @@ class Fields
         return $this;
     }
 
+    public function getComment()
+    {
+        return $this->comment;
+    }
+
     public function setComment($comment)
     {
         $this->comment = $comment;
         return $this;
     }
 
+    public function getQuantity()
+    {
+        return $this->quantity;
+    }
+
     public function setQuantity($quantity)
     {
-        if (!preg_match('/^\d$/', $quantity)) {
+        if (!preg_match('/\d/', $quantity)) {
             throw new Exception("Количество товара может содержать только числа!");
         }
         $this->quantity = $quantity;
         return $this;
+    }
+
+    public function getCountry()
+    {
+        return $this->country;
+    }
+
+    public function setCountry($country)
+    {
+        $this->country = $country;
+        return $this;
+    }
+
+    public function getPostIndex()
+    {
+        return $this->postIndex;
     }
 
     public function setPostIndex($postIndex)
@@ -335,220 +143,9 @@ class Fields
         return $this;
     }
 
-    public function setAdditional1($additional1)
+    public function getRegion()
     {
-        $this->additional1 = $additional1;
-        return $this;
-    }
-
-    public function setAdditional2($additional2)
-    {
-        $this->additional2 = $additional2;
-        return $this;
-    }
-
-    public function setAdditional3($additional3)
-    {
-        $this->additional3 = $additional3;
-        return $this;
-    }
-
-    public function setAdditional4($additional4)
-    {
-        $this->additional4 = $additional4;
-        return $this;
-    }
-
-    public function setAdditional5($additional5)
-    {
-        $this->additional5 = $additional5;
-        return $this;
-    }
-
-    public function setAdditional6($additional6)
-    {
-        $this->additional6 = $additional6;
-        return $this;
-    }
-
-    public function setAdditional7($additional7)
-    {
-        $this->additional7 = $additional7;
-        return $this;
-    }
-
-    public function setAdditional8($additional8)
-    {
-        $this->additional8 = $additional8;
-        return $this;
-    }
-
-    public function setAdditional9($additional9)
-    {
-        $this->additional9 = $additional9;
-        return $this;
-    }
-
-    public function setAdditional10($additional10)
-    {
-        $this->additional10 = $additional10;
-        return $this;
-    }
-
-    public function setAdditional11($additional11)
-    {
-        $this->additional11 = $additional11;
-        return $this;
-    }
-
-    public function setAdditional12($additional12)
-    {
-        $this->additional12 = $additional12;
-        return $this;
-    }
-
-    public function setAdditional13($additional13)
-    {
-        $this->additional13 = $additional13;
-        return $this;
-    }
-
-    public function setAdditional14($additional14)
-    {
-        $this->additional14 = $additional14;
-        return $this;
-    }
-
-    public function setAdditional15($additional15)
-    {
-        $this->additional15 = $additional15;
-        return $this;
-    }
-
-    public function setAdditional16($additional16)
-    {
-        $this->additional16 = $additional16;
-        return $this;
-    }
-
-    public function setAdditional17($additional17)
-    {
-        $this->additional17 = $additional17;
-        return $this;
-    }
-
-    public function setAdditional18($additional18)
-    {
-        $this->additional18 = $additional18;
-        return $this;
-    }
-
-    public function setAdditional19($additional19)
-    {
-        $this->additional19 = $additional19;
-        return $this;
-    }
-
-    public function setAdditional20($additional20)
-    {
-        $this->additional20 = $additional20;
-        return $this;
-    }
-
-    public function setAdditional21($additional21)
-    {
-        $this->additional21 = $additional21;
-        return $this;
-    }
-
-    public function setAdditional22($additional22)
-    {
-        $this->additional22 = $additional22;
-        return $this;
-    }
-
-    public function setAdditional23($additional23)
-    {
-        $this->additional23 = $additional23;
-        return $this;
-    }
-
-    public function setAdditional24($additional24)
-    {
-        $this->additional24 = $additional24;
-        return $this;
-    }
-
-    public function setAdditional25($additional25)
-    {
-        $this->additional25 = $additional25;
-        return $this;
-    }
-
-    public function setAddress($address)
-    {
-        $this->address = $address;
-        return $this;
-    }
-
-    public function setCity($city)
-    {
-        $this->city = $city;
-        return $this;
-    }
-
-    public function setCountry($country)
-    {
-        $this->country = $country;
-        return $this;
-    }
-
-    public function setDatetime($datetime)
-    {
-        $this->datetime = $datetime;
-        return $this;
-    }
-
-    public function setDomain($domain)
-    {
-        $this->domain = $domain;
-        return $this;
-    }
-
-    public function setFlat($flat)
-    {
-        $this->flat = $flat;
-        return $this;
-    }
-
-    public function setGoods($goods)
-    {
-        $this->goods = $goods;
-        return $this;
-    }
-
-    public function setHouse($house)
-    {
-        $this->house = $house;
-        return $this;
-    }
-
-    public function setIp($ip)
-    {
-        $this->ip = $ip;
-        return $this;
-    }
-
-    public function setOperatorID($operatorID)
-    {
-        $this->operatorID = $operatorID;
-        return $this;
-    }
-
-    public function setReferer($referer)
-    {
-        $this->referer = $referer;
-        return $this;
+        return $this->region;
     }
 
     public function setRegion($region)
@@ -557,10 +154,405 @@ class Fields
         return $this;
     }
 
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    public function setCity($city)
+    {
+        $this->city = $city;
+        return $this;
+    }
+
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    public function setAddress($address)
+    {
+        $this->address = $address;
+        return $this;
+    }
+
+    public function getHouse()
+    {
+        return $this->house;
+    }
+
+    public function setHouse($house)
+    {
+        $this->house = $house;
+        return $this;
+    }
+
+    public function getFlat()
+    {
+        return $this->flat;
+    }
+
+    public function setFlat($flat)
+    {
+        $this->flat = $flat;
+        return $this;
+    }
+
+    public function getGoods(): array
+    {
+        return $this->goods;
+    }
+
+    public function setGoods($goods)
+    {
+        $this->goods = $goods;
+        return $this;
+    }
+
+    public function getAdditional1()
+    {
+        return $this->additional1;
+    }
+
+    public function setAdditional1($additional1)
+    {
+        $this->additional1 = $additional1;
+        return $this;
+    }
+
+    public function getAdditional2()
+    {
+        return $this->additional2;
+    }
+
+    public function setAdditional2($additional2)
+    {
+        $this->additional2 = $additional2;
+        return $this;
+    }
+
+    public function getAdditional3()
+    {
+        return $this->additional3;
+    }
+
+    public function setAdditional3($additional3)
+    {
+        $this->additional3 = $additional3;
+        return $this;
+    }
+
+    public function getAdditional4()
+    {
+        return $this->additional4;
+    }
+
+    public function setAdditional4($additional4)
+    {
+        $this->additional4 = $additional4;
+        return $this;
+    }
+
+    public function getAdditional5()
+    {
+        return $this->additional5;
+    }
+
+    public function setAdditional5($additional5)
+    {
+        $this->additional5 = $additional5;
+        return $this;
+    }
+
+    public function getAdditional6()
+    {
+        return $this->additional6;
+    }
+
+    public function setAdditional6($additional6)
+    {
+        $this->additional6 = $additional6;
+        return $this;
+    }
+
+    public function getAdditional7()
+    {
+        return $this->additional7;
+    }
+
+    public function setAdditional7($additional7)
+    {
+        $this->additional7 = $additional7;
+        return $this;
+    }
+
+    public function getAdditional8()
+    {
+        return $this->additional8;
+    }
+
+    public function setAdditional8($additional8)
+    {
+        $this->additional8 = $additional8;
+        return $this;
+    }
+
+    public function getAdditional9()
+    {
+        return $this->additional9;
+    }
+
+    public function setAdditional9($additional9)
+    {
+        $this->additional9 = $additional9;
+        return $this;
+    }
+
+    public function getAdditional10()
+    {
+        return $this->additional10;
+    }
+
+    public function setAdditional10($additional10)
+    {
+        $this->additional10 = $additional10;
+        return $this;
+    }
+
+    public function getAdditional11()
+    {
+        return $this->additional11;
+    }
+
+    public function setAdditional11($additional11)
+    {
+        $this->additional11 = $additional11;
+        return $this;
+    }
+
+    public function getAdditional12()
+    {
+        return $this->additional12;
+    }
+
+    public function setAdditional12($additional12)
+    {
+        $this->additional12 = $additional12;
+        return $this;
+    }
+
+    public function getAdditional13()
+    {
+        return $this->additional13;
+    }
+
+    public function setAdditional13($additional13)
+    {
+        $this->additional13 = $additional13;
+        return $this;
+    }
+
+    public function getAdditional14()
+    {
+        return $this->additional14;
+    }
+
+    public function setAdditional14($additional14)
+    {
+        $this->additional14 = $additional14;
+        return $this;
+    }
+
+    public function getAdditional15()
+    {
+        return $this->additional15;
+    }
+
+    public function setAdditional15($additional15)
+    {
+        $this->additional15 = $additional15;
+        return $this;
+    }
+
+    public function getAdditional16()
+    {
+        return $this->additional16;
+    }
+
+    public function setAdditional16($additional16)
+    {
+        $this->additional16 = $additional16;
+        return $this;
+    }
+
+    public function getAdditional17()
+    {
+        return $this->additional17;
+    }
+
+    public function setAdditional17($additional17)
+    {
+        $this->additional17 = $additional17;
+        return $this;
+    }
+
+    public function getAdditional18()
+    {
+        return $this->additional18;
+    }
+
+    public function setAdditional18($additional18)
+    {
+        $this->additional18 = $additional18;
+        return $this;
+    }
+
+    public function getAdditional19()
+    {
+        return $this->additional19;
+    }
+
+    public function setAdditional19($additional19)
+    {
+        $this->additional19 = $additional19;
+        return $this;
+    }
+
+    public function getAdditional20()
+    {
+        return $this->additional20;
+    }
+
+    public function setAdditional20($additional20)
+    {
+        $this->additional20 = $additional20;
+        return $this;
+    }
+
+    public function getAdditional21()
+    {
+        return $this->additional21;
+    }
+
+    public function setAdditional21($additional21)
+    {
+        $this->additional21 = $additional21;
+        return $this;
+    }
+
+    public function getAdditional22()
+    {
+        return $this->additional22;
+    }
+
+    public function setAdditional22($additional22)
+    {
+        $this->additional22 = $additional22;
+        return $this;
+    }
+
+    public function getAdditional23()
+    {
+        return $this->additional23;
+    }
+
+    public function setAdditional23($additional23)
+    {
+        $this->additional23 = $additional23;
+        return $this;
+    }
+
+    public function getAdditional24()
+    {
+        return $this->additional24;
+    }
+
+    public function setAdditional24($additional24)
+    {
+        $this->additional24 = $additional24;
+        return $this;
+    }
+
+    public function getAdditional25()
+    {
+        return $this->additional25;
+    }
+
+    public function setAdditional25($additional25)
+    {
+        $this->additional25 = $additional25;
+        return $this;
+    }
+
+    public function getDomain()
+    {
+        return $this->domain;
+    }
+
+    public function setDomain($domain)
+    {
+        $this->domain = $domain;
+        return $this;
+    }
+
+    public function getReferer()
+    {
+        return $this->referer;
+    }
+
+    public function setReferer($referer)
+    {
+        $this->referer = $referer;
+        return $this;
+    }
+
+    public function getIp()
+    {
+        return $this->ip;
+    }
+
+    public function setIp($ip)
+    {
+        $this->ip = $ip;
+        return $this;
+    }
+
+    public function getDatetime()
+    {
+        return $this->datetime;
+    }
+
+    public function setDatetime($datetime)
+    {
+        $this->datetime = $datetime;
+        return $this;
+    }
+
+    public function getTimezone()
+    {
+        return $this->timezone;
+    }
+
     public function setTimezone($timezone)
     {
         $this->timezone = $timezone;
         return $this;
+    }
+
+    public function getOperatorID()
+    {
+        return $this->operatorID;
+    }
+
+    public function setOperatorID($operatorID)
+    {
+        $this->operatorID = $operatorID;
+        return $this;
+    }
+
+    public function getWebmaster()
+    {
+        return $this->webmaster;
     }
 
     public function setWebmaster($webmaster)
